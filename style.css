@@ -17,15 +17,16 @@ body { margin: 0; font-family: 'Poppins', sans-serif; background: #1a1a1a; color
 /* --- NAVBAR MEJORADA (ESTILO PIXEL Y ANIMADA) --- */
 .navbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between; /* Separa el título de los links */
     align-items: center;
-    padding: 15px 5%;
-    background: rgba(0, 0, 0, 0.9);
+    padding: 10px 5%;
+    background: #000;
+    border-bottom: 3px solid var(--gold);
     position: fixed;
     width: 100%;
+    top: 0;
     z-index: 1000;
-    border-bottom: 3px solid var(--gold);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    box-sizing: border-box;
 }
 
 .logo-pixel {
@@ -53,16 +54,22 @@ body { margin: 0; font-family: 'Poppins', sans-serif; background: #1a1a1a; color
     100% { left: 100%; }
 }
 
-.nav-links { display: flex; list-style: none; gap: 20px; }
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 15px; /* Espacio entre cada link */
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap; /* Si el espacio es poco, saltan abajo */
+    justify-content: flex-end;
+}
 
 .nav-item {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px; /* Tamaño ideal para que quepan todos */
     color: white;
     text-decoration: none;
-    font-family: 'Press Start 2P';
-    font-size: 0.7rem;
     transition: 0.3s;
-    position: relative;
-    padding: 5px 0;
 }
 
 .nav-item:hover {
@@ -748,10 +755,12 @@ img {
 /* =========================================
    CONFIGURACION MOVILES Y TABLETAS
    ========================================= */
-@media (max-width: 1024px) {
-    /* En tablets, las tarjetas de niveles bajan a 1 por fila si es necesario */
-    .shrine-card { width: 90%; max-width: 450px; }
-    .pixel-card-v { width: 45%; } /* 2 tarjetas por fila en tablets */
+.wood-frame, .inner-paper, .shrine-card, .guia-container {
+    max-width: 95% !important; /* Deja un pequeño margen a los lados */
+    width: auto !important;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box; /* Para que el borde no sume ancho extra */
 }
 
 @media (max-width: 768px) {
@@ -760,6 +769,14 @@ img {
         font-size: 1.5rem !important;
         letter-spacing: 1px;
     }
+    @media (max-width: 768px) {
+    .nav-links {
+        gap: 10px; /* Reduce el espacio entre palabras */
+    }
+    .nav-item {
+        font-size: 0.5rem !important; /* Tipografía micro para que quepan todos */
+    }
+}
 
     /* El equipo pasa de horizontal a vertical */
     .pixel-team-vertical {
@@ -782,4 +799,15 @@ img {
     display: flex;
     flex-wrap: wrap; /* <--- ESTA ES LA CLAVE */
     justify-content: center;
+}
+/* RESET PARA EVITAR DESBORDAMIENTOS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden; /* Prohibido el scroll hacia los lados */
+    width: 100%;
 }
