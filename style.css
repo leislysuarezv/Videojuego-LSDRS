@@ -1,0 +1,785 @@
+:root {
+    --sky: #87CEEB;
+    --grass: #4CAF50;
+    --earth: #8B4513;
+    --gold: #FFD700;
+}
+
+/* --- CONFIGURACIÓN GLOBAL --- */
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: 'Poppins', sans-serif; background: #1a1a1a; color: white; overflow-x: hidden; }
+
+.section {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    align-items: center; padding: 80px 20px; box-sizing: border-box; text-align: center;
+}
+
+/* --- NAVBAR MEJORADA (ESTILO PIXEL Y ANIMADA) --- */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+}
+
+.logo-pixel {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de brillo que recorre el texto de la navbar */
+.shine-effect::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shine-sweep 3s infinite;
+}
+
+@keyframes shine-sweep {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
+
+.nav-links { display: flex; list-style: none; gap: 20px; }
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    font-family: 'Press Start 2P';
+    font-size: 0.7rem;
+    transition: 0.3s;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-item:hover {
+    color: var(--gold);
+    text-shadow: 0 0 10px var(--gold);
+    transform: translateY(-3px);
+}
+
+/* Animación de latido para el botón Jugar */
+.pulse-link {
+    animation: link-pulse 2s infinite ease-in-out;
+}
+
+@keyframes link-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+/* --- SECCIÓN HERO (INICIO) --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #5dbce2 0%, #1a5276 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.magic-dust {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(circle, #fff 1.5px, transparent 1.5px);
+    background-size: 80px 80px; animation: dustMove 20s linear infinite;
+    opacity: 0.3; z-index: 1;
+    pointer-events: none;
+}
+
+.vignette {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes dustMove { from { background-position: 0 0; } to { background-position: 0 -1000px; } }
+
+/* TÍTULO PRINCIPAL CON DEGRADADO ANIMADO */
+.pixel-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.8rem;
+    color: white;
+    text-shadow: 5px 5px 0px var(--earth);
+    background: linear-gradient(90deg, #fff, #ffd700, #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 4s linear infinite;
+    z-index: 3;
+    position: relative;
+}
+
+@keyframes shineText { to { background-position: 200% center; } }
+
+/* --- EL BOTÓN "EMPEZAR VIAJE" --- */
+.arcade-press {
+    display: inline-block;
+    background: #FFD700;
+    color: #000;
+    padding: 20px 45px;
+    font-family: 'Press Start 2P', cursive;
+    text-decoration: none;
+    border: 4px solid #000;
+    box-shadow: 6px 6px 0px #000;
+    transition: 0.1s;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto !important;
+}
+
+.arcade-press:hover {
+    background: #ffdb4d;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px #000;
+}
+
+.arcade-press:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px #000;
+}
+
+/* --- SECCIÓN AVENTURA Y TEXTURAS --- */
+.inner-paper {
+    background: #fdf5e6;
+    background-image: url("https://www.transparenttextures.com/patterns/old-map.png");
+    padding: 30px;
+    border: 2px solid #d7ccc8;
+    color: #3e2723; /* Texto oscuro para legibilidad */
+}
+
+.game-description { color: #3e2723; line-height: 1.6; font-weight: 600; font-size: 1.1rem; }
+
+/* Margen de llegada para el ID demo */
+#demo {
+    scroll-margin-top: 100px;
+}
+
+/* --- OTROS ESTILOS --- */
+.alex-aura { position: relative; width: 320px; height: 320px; margin: 0 auto 30px; z-index: 3; }
+.main-logo.floating {
+    width: 100%; border: 8px solid white; border-radius: 50%; position: relative;
+    z-index: 4; animation: floatAnim 4s ease-in-out infinite;
+}
+@keyframes floatAnim { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+.wood-frame {
+    background: #5d4037;
+    padding: 15px; /* Reducimos el borde de madera */
+    border: 4px solid #3e2723;
+    box-shadow: inset 4px 4px 0px #795548, 10px 10px 0px rgba(0,0,0,0.5);
+    max-width: 800px; /* Mantiene el ancho controlado */
+    margin: 0 auto; /* Lo centra */
+}
+
+/* El papel donde está el juego y el texto */
+.inner-paper {
+    background: #fdf5e6;
+    background-image: url("https://www.transparenttextures.com/patterns/old-map.png");
+    padding: 20px 30px; /* Reducimos el padding superior/inferior para que no sea tan larga */
+    border: 2px solid #d7ccc8;
+    color: #3e2723;
+}
+
+/* Controlamos el tamaño de la imagen del juego para que no empuje todo hacia abajo */
+.image-wrap {
+    margin: 15px 0; /* Menos margen entre el título y la imagen */
+    max-height: 400px; /* Limita la altura de la zona de imagen */
+    overflow: hidden;
+    background: #9e9e9e;
+    padding: 8px;
+    border: 4px solid #424242;
+}
+
+.game-screenshot {
+    width: 100%;
+    height: auto;
+    max-height: 350px; /* Ajusta este valor si quieres que el juego se vea más pequeño */
+    object-fit: cover; /* Mantiene la proporción sin estirar */
+    border: 2px solid #000;
+}
+.adventure-bg {
+     background: radial-gradient(circle, #2c3e50 0%, #000000 100%);
+    padding: 80px 20px;
+}
+
+/* =========================================
+   SECCIÓN: CONTROLES VIDEOJUEGO
+   ========================================= */
+/* Fondo de piedra con textura */
+.stone-bg {
+    background-color: #455a64;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+}
+
+/* El Contenedor de Piedra principal */
+.stone-frame {
+    background: #78909c;
+    border: 8px solid #37474f;
+    padding: 60px 40px; /* Más aire arriba y abajo */
+    box-shadow: inset 8px 8px 0px #d6dde0, inset -8px -8px 0px #263238, 20px 20px 0px rgba(0,0,0,0.4);
+    border-radius: 4px;
+    max-width: 1100px; /* Evita que se estire demasiado en pantallas gigantes */
+    margin: 0 auto;
+}
+
+.controls-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Más espacio entre tarjetas */
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+/* Tarjetas de control más anchas y altas */
+.control-card {
+    background: rgba(0,0,0,0.3);
+    padding: 30px 20px; /* Más espacio interno */
+    border: 5px solid #fff; /* Borde más grueso */
+    border-radius: 12px;
+    width: 280px; /* Aumentado de 220px a 280px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.3s;
+}
+
+/* --- SPRITES Y PREVISUALIZACIÓN --- */
+
+.character-preview {
+    height: 140px; /* Aumentado de 100px para que Alex respire */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.alex-sprite {
+    height: 120px; /* ¡Alex ahora es mucho más grande! (era 80px) */
+    image-rendering: pixelated;
+    filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.5));
+}
+
+/* Para el icono del libro en "Resolver" */
+.character-preview img[alt*="libro"], 
+.character-preview .pulse {
+    height: 100px; /* El libro también crece */
+}
+
+/* --- TECLAS (KEY-CAPS) --- */
+
+.key-cap {
+    background: #fff;
+    color: #333;
+    padding: 12px 20px; /* Teclas más cómodas */
+    font-family: 'Press Start 2P';
+    font-size: 14px; /* Letras de teclas más grandes (eran 10px) */
+    border-radius: 8px;
+    border-bottom: 8px solid #999; /* Efecto 3D más marcado */
+    margin-bottom: 20px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.key-cap.space {
+    padding: 12px 60px; /* La barra espaciadora ahora es más larga */
+}
+
+/* Texto descriptivo debajo de la tecla */
+.control-card p {
+    font-size: 15px; /* Texto más legible */
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- ANIMACIONES --- */
+@keyframes mini-jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-40px); } /* Salto más alto para compensar el tamaño */
+}
+
+/* 1. ANIMACIÓN DE SALTO (Alex) */
+.jump-anim {
+    animation: master-jump 1.5s infinite ease-in-out;
+}
+
+@keyframes master-jump {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+    }
+    50% { 
+        transform: translateY(-45px) scale(1.05); /* Salto más alto y un pelín de estiramiento */
+    }
+}
+
+/* 2. ANIMACIÓN DE BRILLO (Libro) */
+
+.pulse {
+    animation: golden-glow 2s infinite alternate;
+}
+
+@keyframes golden-glow {
+    0% { 
+        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+        transform: scale(1);
+    }
+    100% { 
+        filter: drop-shadow(0 0 25px rgba(255, 215, 0, 1));
+        transform: scale(1.1); /* El libro late sutilmente */
+    }
+}
+
+/* 3. MOVIMIENTO DE LAS TARJETAS (Hover) */
+.control-card {
+    background: rgba(0,0,0,0.3);
+    padding: 30px 20px;
+    border: 5px solid #fff;
+    border-radius: 12px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Movimiento suave y elástico */
+    cursor: pointer;
+}
+
+.control-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-15px) scale(1.05); /* La tarjeta sube y se agranda */
+    border-color: #f1c40f; /* El borde se vuelve dorado al pasar el mouse */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* 4. EFECTO EXTRA: Que la tecla brille al pasar el mouse por la tarjeta */
+.control-card:hover .key-cap {
+    background: #f1c40f;
+    border-bottom-color: #9c7e00;
+    color: #000;
+}
+
+/* =========================================
+   SECCIÓN: SANTUARIOS DE CONOCIMIENTO (NIVELES)
+   ========================================= */
+/* Fondo oscuro de ruinas */
+.ruinas-bg {
+    background: #1a1a1a;
+    background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
+}
+
+.shrine-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1300px; /* Asegura que en pantallas grandes respire */
+    margin: 0 auto;
+}
+
+/* El Contenedor de Piedra (MÁS GRANDE) */
+.shrine-card {
+    background: #424242;
+    border: 6px solid #212121;
+    padding: 15px; /* Más espacio interno */
+    box-shadow: 
+        inset 4px 4px 0px #616161, 
+        0 15px 30px rgba(0,0,0,0.6);
+    width: 480px; /* Aumentado de 340px a 480px */
+    transition: 0.3s;
+}
+
+/* Cabecera con Gemas */
+.stone-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+}
+
+.level-tag {
+    font-family: 'Press Start 2P';
+    font-size: 12px; /* Un poco más grande */
+    color: #bdbdbd;
+}
+
+.gem {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px currentColor;
+}
+
+.gem.blue { background: #00d2ff; color: #00d2ff; }
+.gem.red { background: #ff4757; color: #ff4757; }
+
+/* El visor del nivel (IMAGEN MÁS GRANDE) */
+.shrine-viewport {
+    border: 4px solid #000;
+    overflow: hidden;
+    position: relative;
+    height: 300px; /* Aumentado de 200px a 300px */
+}
+
+.viewport-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    image-rendering: pixelated;
+    transition: 0.5s;
+    filter: sepia(0.3) contrast(1.2);
+}
+
+/* Pie de la tarjeta (TÍTULO MÁS ARRIBA Y GRANDE) */
+.shrine-footer {
+    padding: 10px 0; /* Reducimos padding para que el texto suba */
+    text-align: center;
+}
+
+.shrine-footer h3 {
+    font-family: 'Press Start 2P';
+    font-size: 16px; /* Aumentado de 12px a 16px */
+    color: var(--gold);
+    margin: 5px 0 10px 0; /* Ajustamos márgenes para que suba */
+}
+
+.divider {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #bdbdbd, transparent);
+    margin: 8px 0;
+}
+
+.shrine-footer p {
+    font-size: 14px; /* Un poco más grande */
+    color: #eee;
+    font-style: italic;
+    line-height: 1.4;
+    padding: 0 10px;
+}
+
+/* Animación al pasar el mouse */
+.shrine-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    border-color: var(--gold);
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+}
+
+.shrine-card:hover .viewport-img {
+    filter: sepia(0) contrast(1);
+    transform: scale(1.05);
+}
+/* Este es el título principal de la sección de Niveles */
+#niveles .pixel-text-small {
+    font-size: 2.0rem;          /* Mucho más grande (estaba en 1.1rem) */
+    color: #f1c40f;             /* Color dorado brillante */
+    text-shadow: 
+        4px 4px 0px #000,       /* Sombra negra para efecto 3D */
+        0 0 20px rgba(241, 196, 15, 0.5); /* Resplandor dorado */
+    margin-bottom: 50px;        /* Más espacio respecto a las tarjetas */
+    text-align: center;
+    width: 100%;
+    display: block;
+    letter-spacing: 3px;        /* Espaciado entre letras para que se vea más épico */
+}
+
+/* Ajuste para que no se vea gigante en celulares */
+@media (max-width: 600px) {
+    #niveles .pixel-text-small {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+}
+#niveles .pixel-text-small {
+    font-family: 'Press Start 2P', cursive; /* Aplica la fuente pixel art */
+    font-size: 2.2rem;                       /* Mantiene el tamaño épico */
+    text-transform: uppercase;               /* Asegura que esté en mayúsculas como un juego */
+    letter-spacing: 2px;                     /* Mejora la lectura en este estilo */
+    
+    /* Mantenemos tus colores y sombras actuales */
+    color: #f1c40f; 
+    text-shadow: 
+        4px 4px 0px #000, 
+        0 0 20px rgba(241, 196, 15, 0.5);
+    
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin-bottom: 50px;
+}
+
+/* =========================================
+   SECCIÓN: MAQUINA DEMO + ENALCE VIDEOJUEGO
+   ========================================= */
+/* Fondo de espacio profundo */
+.demo-universe {
+    background: radial-gradient(circle, #2c3e50 0%, #000000 100%);
+    padding: 80px 20px;
+}
+
+/* La Máquina de Juego */
+.arcade-cabinet {
+    background: #333;
+    border: 10px solid #111;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    box-shadow: 0 0 50px rgba(0, 210, 255, 0.3);
+    max-width: 700px;
+    width: 100%;
+}
+
+/* Bordes de la pantalla estilo retro */
+.screen-border {
+    background: #222;
+    padding: 15px;
+    border-radius: 10px;
+    border: 4px solid #444;
+}
+
+.screen-glass {
+    position: relative;
+    background: #000;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: inset 0 0 60px rgba(0,0,0,1);
+}
+
+/* Imagen de fondo (puedes usar un GIF de Alex corriendo) */
+.game-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    image-rendering: pixelated;
+}
+
+/* Botón Flotante Central */
+.press-start-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.btn-pixel-play {
+    background: #f1c40f;
+    color: #000;
+    padding: 20px 40px;
+    font-family: 'Press Start 2P', cursive;
+    text-decoration: none;
+    border: 6px solid #000;
+    box-shadow: 8px 8px 0px #e67e22;
+    font-size: 1.2rem;
+    display: inline-block;
+    animation: pulse-button 1.5s infinite;
+}
+
+@keyframes pulse-button {
+    0% { transform: scale(1); box-shadow: 8px 8px 0px #e67e22; }
+    50% { transform: scale(1.05); box-shadow: 12px 12px 0px #d35400; }
+    100% { transform: scale(1); box-shadow: 8px 8px 0px #e67e22; }
+}
+
+/* Decoración del Panel */
+.arcade-panel {
+    background: #444;
+    height: 80px;
+    margin-top: 10px;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 4px solid #222;
+}
+
+.joystick .stick {
+    width: 15px; height: 40px; background: #222; margin: 0 auto; position: relative;
+}
+.joystick .stick::after {
+    content: ''; position: absolute; top: -15px; left: -10px; width: 35px; height: 35px; background: #e74c3c; border-radius: 50%;
+}
+
+.buttons { display: flex; gap: 15px; }
+.btn-red, .btn-blue { width: 30px; height: 30px; border-radius: 50%; border-bottom: 4px solid rgba(0,0,0,0.3); }
+.btn-red { background: #ff4757; }
+.btn-blue { background: #3498db; }
+
+.demo-subtext {
+    color: #888;
+    margin-top: 20px;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   SECCIÓN: EQUIPO DE TRABAJO
+   ========================================= */
+.pixel-team-vertical {
+    display: flex;
+    flex-direction: row; /* ¡La magia ocurre aquí! */
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap; /* Por si la pantalla es chica, se acomodan solos */
+    padding: 20px;
+}
+
+.pixel-card-v {
+    background: #23272e;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0px #000;
+    width: 320px; /* Tarjetas más grandes */
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.pixel-card-v:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+}
+
+.portrait-box img {
+    width: 100%;
+    height: 300px; /* Más espacio para la foto */
+    object-fit: cover; 
+    
+    /* ESTA LÍNEA ES LA MAGIA PARA KEREN: */
+    object-position: center 40%; 
+    
+    border-bottom: 4px solid #000;
+    image-rendering: auto; /* Para que las fotos se vean nítidas */
+}
+
+.sprite-v {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* La imagen llena el cuadro vertical */
+    image-rendering: pixelated;
+}
+
+.pixel-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.pixel-content h4 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 11px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.pixel-tag {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    background: #e67e22;
+    color: #000;
+    display: inline-block;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+}
+
+.pixel-bio {
+    font-family: 'Poppins', sans-serif;
+    color: #bdc3c7;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    text-align: left; /* Descripción alineada a la izquierda para mejor lectura */
+}
+
+/* Esto asegura que ninguna imagen se desborde, pero que sí llene su espacio */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Para las imágenes pixel art, evita que se vean borrosas al agrandarse */
+.sprite-v, .viewport-img, .level-img, .game-gif {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* Hace que la imagen llene el cuadro sin deformarse */
+    image-rendering: pixelated; 
+}
+.bottom-bar {
+    background: #000;
+    border-top: 3px solid var(--gold);
+    padding: 30px;
+    text-align: center;
+}
+.pixel-text-tiny {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.60rem;
+    color: #888;
+    margin: 0;
+}
+.pixel-text-small {
+    font-family: 'Press Start 2P', cursive; /* Aplica la fuente pixel art */
+    font-size: 2.2rem;                       /* Mantiene el tamaño épico */
+    text-transform: uppercase;               /* Asegura que esté en mayúsculas como un juego */
+    letter-spacing: 2px;
+    }
+
+/* =========================================
+   CONFIGURACION MOVILES Y TABLETAS
+   ========================================= */
+@media (max-width: 1024px) {
+    /* En tablets, las tarjetas de niveles bajan a 1 por fila si es necesario */
+    .shrine-card { width: 90%; max-width: 450px; }
+    .pixel-card-v { width: 45%; } /* 2 tarjetas por fila en tablets */
+}
+
+@media (max-width: 768px) {
+    /* Títulos más pequeños para que no se corten */
+    .pixel-text, #niveles .pixel-text-small {
+        font-size: 1.5rem !important;
+        letter-spacing: 1px;
+    }
+
+    /* El equipo pasa de horizontal a vertical */
+    .pixel-team-vertical {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pixel-card-v {
+        width: 100%; /* Una tarjeta debajo de otra */
+        max-width: 320px;
+    }
+
+    /* La máquina arcade se ajusta al ancho del celular */
+    .arcade-machine {
+        width: 95%;
+        padding: 10px;
+    }
+}
+.pixel-team-vertical, .shrine-grid {
+    display: flex;
+    flex-wrap: wrap; /* <--- ESTA ES LA CLAVE */
+    justify-content: center;
+}
