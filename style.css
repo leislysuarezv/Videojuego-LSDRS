@@ -17,16 +17,15 @@ body { margin: 0; font-family: 'Poppins', sans-serif; background: #1a1a1a; color
 /* --- NAVBAR MEJORADA (ESTILO PIXEL Y ANIMADA) --- */
 .navbar {
     display: flex;
-    justify-content: space-between; /* Separa el título de los links */
+    justify-content: space-around;
     align-items: center;
-    padding: 10px 5%;
-    background: #000;
-    border-bottom: 3px solid var(--gold);
+    padding: 15px 5%;
+    background: rgba(0, 0, 0, 0.9);
     position: fixed;
     width: 100%;
-    top: 0;
     z-index: 1000;
-    box-sizing: border-box;
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.8);
 }
 
 .logo-pixel {
@@ -54,22 +53,16 @@ body { margin: 0; font-family: 'Poppins', sans-serif; background: #1a1a1a; color
     100% { left: 100%; }
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 15px; /* Espacio entre cada link */
-    margin: 0;
-    padding: 0;
-    flex-wrap: wrap; /* Si el espacio es poco, saltan abajo */
-    justify-content: flex-end;
-}
+.nav-links { display: flex; list-style: none; gap: 20px; }
 
 .nav-item {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px; /* Tamaño ideal para que quepan todos */
     color: white;
     text-decoration: none;
+    font-family: 'Press Start 2P';
+    font-size: 0.7rem;
     transition: 0.3s;
+    position: relative;
+    padding: 5px 0;
 }
 
 .nav-item:hover {
@@ -753,61 +746,153 @@ img {
     }
 
 /* =========================================
-   CONFIGURACION MOVILES Y TABLETAS
+   CONFIGURACIÓN MÓVILES Y TABLETAS (OPTIMIZADO)
    ========================================= */
-.wood-frame, .inner-paper, .shrine-card, .guia-container {
-    max-width: 95% !important; /* Deja un pequeño margen a los lados */
-    width: auto !important;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box; /* Para que el borde no sume ancho extra */
+
+/* 1. Ajuste para Tablets */
+@media (max-width: 1024px) {
+    .shrine-card { width: 90%; max-width: 450px; }
+    .pixel-card-v { width: 45%; } 
 }
 
+/* 2. Ajuste para Celulares (Donde se rompía Alex y la Guía) */
 @media (max-width: 768px) {
-    /* Títulos más pequeños para que no se corten */
+    /* Títulos: Bajamos un poco más el tamaño para que no desborden */
     .pixel-text, #niveles .pixel-text-small {
-        font-size: 1.5rem !important;
-        letter-spacing: 1px;
+        font-size: 1.2rem !important; 
+        letter-spacing: 0px;
+        width: 100%;
+        text-align: center;
     }
-    @media (max-width: 768px) {
-    .nav-links {
-        gap: 10px; /* Reduce el espacio entre palabras */
-    }
-    .nav-item {
-        font-size: 0.5rem !important; /* Tipografía micro para que quepan todos */
-    }
-}
 
-    /* El equipo pasa de horizontal a vertical */
+    /* El Aura de Alex: Evita que empuje el diseño a la derecha */
+    .alex-aura {
+        max-width: 75% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+    }
+
+    /* Guía de Exploración y Misión: Forzamos que no excedan la pantalla */
+    .wood-frame, .inner-paper, .guia-container, .guia-card {
+        width: 95% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 10px !important;
+    }
+
+    /* Equipo en vertical */
     .pixel-team-vertical {
         flex-direction: column;
         align-items: center;
+        gap: 20px;
     }
 
     .pixel-card-v {
-        width: 100%; /* Una tarjeta debajo de otra */
-        max-width: 320px;
+        width: 100%;
+        max-width: 300px;
     }
 
-    /* La máquina arcade se ajusta al ancho del celular */
+    /* Arcade */
     .arcade-machine {
-        width: 95%;
-        padding: 10px;
+        width: 98%;
+        padding: 5px;
     }
 }
-.pixel-team-vertical, .shrine-grid {
+
+/* 3. La Clave del Flexbox (Fuera de las media queries para que funcione siempre) */
+.pixel-team-vertical, .shrine-grid, .nav-links {
     display: flex;
-    flex-wrap: wrap; /* <--- ESTA ES LA CLAVE */
+    flex-wrap: wrap; 
     justify-content: center;
 }
-/* RESET PARA EVITAR DESBORDAMIENTOS */
-* {
+
+/* 4. El "Seguro de Vida" (Añádelo al principio de tu CSS) */
+body, html {
+    overflow-x: hidden; /* Prohíbe el scroll horizontal que se veía en tus fotos */
+    width: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+/* =========================================
+   FIX RESPONSIVE: GUÍA DE EXPLORACIÓN (CONTROLES)
+   ========================================= */
+
+/* --- AJUSTE FINAL: GUÍA DE EXPLORACIÓN (MÁS PEQUEÑA) --- */
+@media (max-width: 480px) {
+    .stone-frame {
+        padding: 20px 10px !important; /* Menos espacio lateral en el marco */
+    }
+
+    .control-card {
+        width: 85% !important; /* Reducimos el ancho de la tarjeta */
+        max-width: 280px !important; 
+        padding: 15px !important;
+        margin-bottom: 15px !important;
+    }
+
+    .alex-sprite {
+        height: 70px !important; /* Alex un poquito más pequeño para que no estire la tarjeta */
+    }
+
+    .key-cap {
+        font-size: 10px !important; /* Letras de teclas más pequeñas */
+        padding: 8px 12px !important;
+    }
+
+    .key-cap.space {
+        padding: 8px 30px !important; /* Barra espaciadora más corta */
+    }
+
+    /* Evitamos que el título "GUÍA DE EXPLORACIÓN" se salga */
+    .stone-bg h2 {
+        font-size: 1rem !important;
+        line-height: 1.2;
+    }
 }
 
-body {
-    overflow-x: hidden; /* Prohibido el scroll hacia los lados */
-    width: 100%;
+/* Estilos base para el botón (oculto en PC) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #f1c40f; /* Dorado para resaltar */
+    transition: 0.3s;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* Aparece en móviles */
+    }
+
+    .nav-links {
+        display: none; /* Se oculta por defecto */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px; /* Ajusta según la altura de tu nav */
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        padding: 20px 0;
+        border-bottom: 2px solid #f1c40f;
+    }
+
+    /* Clase que activará el JS */
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-item {
+        display: block;
+        text-align: center;
+        padding: 15px;
+        width: 100%;
+    }
 }
